@@ -75,6 +75,26 @@
    expected
    (concatenate 'string "every" (string predicate))))
 
+(defun error-p (test-form)
+  (assertion (error-check test-form) test-form 'error 'catch-error))
+
+(defun not-error-p (test-form)
+  (assertion (not (error-check test-form)) test-form 'error 'catch-error))
+
+(defmacro condition-error-p (test-fn condition)
+  `(assertion
+    (condition-error-check ,test-fn ,condition)
+    'test-fn
+    'error
+    'catch-error))
+
+(defmacro not-condition-error-p (test-fn condition)
+  `(assertion
+    (not (condition-error-check ,test-fn ,condition))
+    'test-fn
+    'error
+    'catch-error))
+
 (defun custom-p (test-result actual expected operator)
   (assertion test-result actual expected operator))
 

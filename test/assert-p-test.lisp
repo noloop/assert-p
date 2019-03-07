@@ -8,125 +8,142 @@
 (in-package #:noloop.assert-p-test)
 
 (defun test-t-p ()
-  (let ((actual t)
-        (expected t))
+  (let ((actual t))
     (assertion-error-check
-     (eq (t-p actual) expected))))
+     (eq (t-p actual) nil))))
 
 (defun test-not-t-p ()
-  (let ((actual nil)
-        (expected t))
+  (let ((actual nil))
     (assertion-error-check
-     (eq (not-t-p actual) expected))))
+     (eq (not-t-p actual) nil))))
 
 (defun test-zero-p ()
-  (let ((actual 0)
-        (expected t))
+  (let ((actual 0))
     (assertion-error-check
-     (eq (zero-p actual) expected))))
+     (eq (zero-p actual) nil))))
 
 (defun test-not-zero-p ()
-  (let ((actual 7))
+  (let ((actual nil))
     (assertion-error-check
-     (eq (not-zero-p actual) t))))
+     (eq (not-zero-p actual) nil))))
 
 (defun test-nil-p ()
   (let ((actual nil))
     (assertion-error-check
-     (eq (nil-p actual) t))))
+     (eq (nil-p actual) nil))))
 
 (defun test-not-nil-p ()
   (let ((actual t))
     (assertion-error-check
-     (eq (not-nil-p actual) t))))
+     (eq (not-nil-p actual) nil))))
 
 (defun test-null-p ()
   (let ((actual nil))
     (assertion-error-check
-     (eq (null-p actual) t))))
+     (eq (null-p actual) nil))))
 
 (defun test-not-null-p ()
   (let ((actual t))
     (assertion-error-check
-     (eq (not-null-p actual) t))))
+     (eq (not-null-p actual) nil))))
 
 (defun test-eq-p ()
   (let ((actual t)
         (expected t))
     (assertion-error-check
-     (eq (eq-p actual expected) t))))
+     (eq (eq-p actual expected) nil))))
 
 (defun test-not-eq-p ()
   (let ((actual 3)
         (expected t))
     (assertion-error-check
-     (eq (not-eq-p actual expected) t))))
+     (eq (not-eq-p actual expected) nil))))
 
 (defun test-eql-p ()
   (let ((actual t)
         (expected t))
     (assertion-error-check
-     (eq (eql-p actual expected) t))))
+     (eq (eql-p actual expected) nil))))
 
 (defun test-not-eql-p ()
   (let ((actual 3)
         (expected t))
     (assertion-error-check
-     (eq (not-eql-p actual expected) t))))
+     (eq (not-eql-p actual expected) nil))))
 
 (defun test-equal-p ()
   (let ((actual t)
         (expected t))
     (assertion-error-check
-     (eq (equal-p actual expected) t))))
+     (eq (equal-p actual expected) nil))))
 
 (defun test-not-equal-p ()
   (let ((actual 3)
         (expected t))
     (assertion-error-check
-     (eq (not-equal-p actual expected) t))))
+     (eq (not-equal-p actual expected) nil))))
 
 (defun test-equalp-p ()
   (let ((actual t)
         (expected t))
     (assertion-error-check
-     (eq (equalp-p actual expected) t))))
+     (eq (equalp-p actual expected) nil))))
 
 (defun test-not-equalp-p ()
   (let ((actual 3)
         (expected t))
     (assertion-error-check
-     (eq (not-equalp-p actual expected) t))))
+     (eq (not-equalp-p actual expected) nil))))
 
 (defun test-typep-p ()
   (let ((actual 1)
         (expected 'integer))
     (assertion-error-check
-     (eq (typep-p actual expected) t))))
+     (eq (typep-p actual expected) nil))))
 
 (defun test-not-typep-p ()
   (let ((actual "stg")
         (expected 'integer))
     (assertion-error-check
-     (eq (not-typep-p actual expected) t))))
+     (eq (not-typep-p actual expected) nil))))
 
 (defun test-values-p ()
   (let ((actual '("i" "i" "i"))
         (expected "i"))
     (assertion-error-check
-     (eq (values-p 'string= actual expected) t))))
+     (eq (values-p 'string= actual expected) nil))))
 
 (defun test-not-values-p ()
   (let ((actual '(1 1 1))
         (expected 2))
     (assertion-error-check
-     (eq (not-values-p '= actual expected) t))))
+     (eq (not-values-p '= actual expected) nil))))
+
+(defun test-error-p ()
+  (assertion-error-check
+   (eq (error-p #'(lambda () (error "Something"))) nil)))
+
+(defun test-not-error-p ()
+  (assertion-error-check
+   (eq (not-error-p #'(lambda () ())) nil)))
+
+(defun test-condition-error-p ()
+  (assertion-error-check
+   (eq nil (condition-error-p
+            #'(lambda () (error 'division-by-zero))
+             division-by-zero))))
+
+(defun test-not-condition-error-p ()
+  (assertion-error-check
+   (eq nil (not-condition-error-p
+            #'(lambda () (error "Something"))
+            division-by-zero))))
 
 (defun test-custom-p ()
   (let ((actual '(1 2 3))
         (expected '(1 2)))
     (assertion-error-check
-     (eq t (custom-p (every #'= actual expected)
+     (eq nil (custom-p (every #'= actual expected)
                    actual
                    expected
                    "every =")))))
@@ -152,5 +169,9 @@
        (test "Test not-typep-p" #'test-not-typep-p)
        (test "Test values-p" #'test-values-p)
        (test "Test not-values-p" #'test-not-values-p)
-       (test "Test custom-p" #'test-custom-p))
-
+       (test "Test error-p" #'test-error-p)
+       (test "Test not-error-p" #'test-not-error-p)
+       (test "Test error-p" #'test-error-p)
+       (test "Test condition-error-p" #'test-condition-error-p)
+       (test "Test not-condition-error-p" #'test-not-condition-error-p)
+       )

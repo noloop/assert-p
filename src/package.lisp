@@ -29,4 +29,8 @@
            #:not-typep-p
            #:values-p
            #:not-values-p
+           #:error-p
+           #:not-error-p
+           #:condition-error-p
+           #:not-condition-error-p
            #:custom-p))

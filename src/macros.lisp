@@ -15,6 +15,15 @@
                          collect `(,n ,g)))
              ,@body)))))
 
+(defmacro assertion-error-check (test-form)
+  (with-gensyms (result)
+    `(let ((,result t))
+       (handler-case ,test-form
+         (assertion-error (c)
+           (declare (ignore c))
+           (setf ,result nil)))
+       ,result)))
+
 (defmacro assertion-values (test-fn predicate actual expected operator)
   (once-only (test-fn predicate actual expected)
     `(assertion (funcall (symbol-function ,test-fn)
@@ -26,27 +35,37 @@
 
 (defmacro error-check (test-form)
   (with-gensyms (result)
-    `(let ((,result t))
-       (handler-case ,test-form
+    `(let ((,result nil))
+       (handler-case (funcall ,test-form)
+         (error (c)
+           (declare (ignore c))
+           (setf ,result t)))
+       ,result)))
+
+(defmacro condition-error-check (test-form condition)
+  (with-gensyms (result)
+    `(let ((,result nil))
+       (handler-case (funcall ,test-form)
+         (,condition (c)
+           (declare (ignore c))
+           (setf ,result t))
          (error (c)
            (declare (ignore c))
            (setf ,result nil)))
        ,result)))
 
-(defmacro condition-error-check (test-form condition)
-  (with-gensyms (result)
-    `(let ((,result t))
-       (handler-case ,test-form
-         (,condition (c)
-           (declare (ignore c))
-           (setf ,result nil)))
-       ,result)))
+;; (defmacro condition-error-p (test-fn condition)
+;;   `(assertion
+;;     (let ((result nil))
+;;       (handler-case (funcall ,test-fn)
+;;         (,condition (c)
+;;           (declare (ignore c))
+;;           (setf result t))
+;;         (error (c)
+;;           (declare (ignore c))
+;;           (setf result nil)))
+;;       result)
+;;     'test-fn
+;;     'error
+;;     'catch-error))
 
-(defmacro assertion-error-check (test-form)
-  (with-gensyms (result)
-    `(let ((,result t))
-       (handler-case ,test-form
-         (assertion-error (c)
-           (declare (ignore c))
-           (setf ,result nil)))
-       ,result)))
