@@ -174,4 +174,4 @@
        (test "Test error-p" #'test-error-p)
        (test "Test condition-error-p" #'test-condition-error-p)
        (test "Test not-condition-error-p" #'test-not-condition-error-p)
-       )
+       (test "Test custom-p" #'test-custom-p))
