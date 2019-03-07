@@ -25,11 +25,11 @@
   (assertion (not (eq nil actual)) actual nil 'not-eq))
 
 (defun null-p (actual)
-  "Check null actual "
+  "Check null actual. Equivalent to (null actual)"
   (assertion (null actual) actual nil 'null))
 
 (defun not-null-p (actual)
-  "Check not null actual "
+  "Check not null actual. Equivalent to (not (null actual))"
   (assertion (not (null actual)) actual nil 'not-null))
 
 (defun eq-p (actual expected)
@@ -81,7 +81,7 @@
        (funcall (symbol-function predicate) expected i))
    actual
    expected
-   (concatenate 'string "every" (string predicate))))
+   (concatenate 'string "every" (write-to-string predicate))))
 
 (defun not-values-p (predicate actual expected)
   "Check actual every not predicate expected. Predicate is a symbol of function, actual is a list, and expected an atom. Example:
@@ -92,31 +92,31 @@
        (not (funcall (symbol-function predicate) expected i)))
    actual
    expected
-   (concatenate 'string "every" (string predicate))))
+   (concatenate 'string "every" (write-to-string predicate))))
 
-(defun error-p (form)
-  "Check if form throw an error."
-  (assertion (error-check form) form 'error 'catch-error))
+(defun error-p (fn)
+  "Check if fn throw an error."
+  (assertion (error-check fn) fn 'error 'catch))
 
-(defun not-error-p (form)
-  "Check if form not throw an error."
-  (assertion (not (error-check form)) form 'error 'catch-error))
+(defun not-error-p (fn)
+  "Check if fn not throw an error."
+  (assertion (not (error-check fn)) fn 'error 'catch))
 
-(defmacro condition-error-p (form condition)
-  "Check if form throw an specified condition error."
+(defmacro condition-error-p (fn condition)
+  "Check if fn throw an specified condition error."
   `(assertion
-    (condition-error-check ,form ,condition)
-    'form
+    (condition-error-check ,fn ,condition)
+    'fn
     'error
-    'catch-error))
+    'catch))
 
-(defmacro not-condition-error-p (form condition)
-  "Check if form not throw an specified condition error."
+(defmacro not-condition-error-p (fn condition)
+  "Check if fn not throw an specified condition error."
   `(assertion
-    (not (condition-error-check ,form ,condition))
-    'form
+    (not (condition-error-check ,fn ,condition))
+    'fn
     'error
-    'catch-error))
+    'catch))
 
 (defun custom-p (test-result actual expected operator)
   "Custom check for special cases. Where test-result is a form that returns t or nil, actual is value actual used in test-result, expected is value expected used in test-result, operator is operator used in test-result. Return t when test-result is t, and throw assertion-error when test-result is nil."

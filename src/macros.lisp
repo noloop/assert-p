@@ -33,19 +33,19 @@
                 ,expected
                 ,operator)))
 
-(defmacro error-check (test-form)
+(defmacro error-check (test-fn)
   (with-gensyms (result)
     `(let ((,result nil))
-       (handler-case (funcall ,test-form)
+       (handler-case (funcall ,test-fn)
          (error (c)
            (declare (ignore c))
            (setf ,result t)))
        ,result)))
 
-(defmacro condition-error-check (test-form condition)
+(defmacro condition-error-check (test-fn condition)
   (with-gensyms (result)
     `(let ((,result nil))
-       (handler-case (funcall ,test-form)
+       (handler-case (funcall ,test-fn)
          (,condition (c)
            (declare (ignore c))
            (setf ,result t))

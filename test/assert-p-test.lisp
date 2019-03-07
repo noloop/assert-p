@@ -144,9 +144,9 @@
         (expected '(1 2)))
     (assertion-error-check
      (eq nil (custom-p (every #'= actual expected)
-                   actual
-                   expected
-                   "every =")))))
+                       actual
+                       expected
+                       "every =")))))
 
 (suite "Suite assert-p"
        (test "Test t-p" #'test-t-p)
@@ -175,3 +175,4 @@
        (test "Test condition-error-p" #'test-condition-error-p)
        (test "Test not-condition-error-p" #'test-not-condition-error-p)
        (test "Test custom-p" #'test-custom-p))
+
