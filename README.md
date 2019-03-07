@@ -6,7 +6,7 @@
 
 ### Dependencies
 
-:assertion-error
+[:assertion-error](https://github.com/noloop/assertion-error)
 
 ### Download and installation
 
@@ -63,52 +63,52 @@ Check actual not eq t. Return t when actual is nil, and throw assertion-error wh
 
 ## API
 
-function **(t-p actual)**
+function **(t-p actual)** => t or throw assertion-error
 
-function **(not-t-p actual)**
+function **(not-t-p actual)** => t or throw assertion-error
 
-function **(zero-p actual)**
+function **(zero-p actual)** => t or throw assertion-error
 
-function **(not-zero-p actual)**
+function **(not-zero-p actual)** => t or throw assertion-error
 
-function **(nil-p actual)**
+function **(nil-p actual)** => t or throw assertion-error
 
-function **(not-nil-p actual)**
+function **(not-nil-p actual)** => t or throw assertion-error
 
-function **(null-p actual)**
+function **(null-p actual)** => t or throw assertion-error
 
-function **(not-null-p actual)**
+function **(not-null-p actual)** => t or throw assertion-error
 
-function **(eq-p actual expected)**
+function **(eq-p actual expected)** => t or throw assertion-error
 
-function **(not-eq-p actual expected)**
+function **(not-eq-p actual expected)** => t or throw assertion-error
 
-function **(eql-p actual expected)**
+function **(eql-p actual expected)** => t or throw assertion-error
 
-function **(not-eql-p actual expected)**
+function **(not-eql-p actual expected)** => t or throw assertion-error
 
-function **(equal-p actual expected)**
+function **(equal-p actual expected)** => t or throw assertion-error
 
-function **(not-equal-p actual expected)**
+function **(not-equal-p actual expected)** => t or throw assertion-error
 
-function **(equalp-p actual expected)**
+function **(equalp-p actual expected)** => t or throw assertion-error
 
-function **(not-equalp-p actual expected)**
+function **(not-equalp-p actual expected)** => t or throw assertion-error
 
-function **(typep-p actual expected)**
+function **(typep-p actual expected)** => t or throw assertion-error
 
-function **(not-typep-p actual expected)**
+function **(not-typep-p actual expected)** => t or throw assertion-error
 
-function **(values-p predicate actual expected)**
+function **(values-p predicate actual expected)** => t or throw assertion-error
 
-function **(not-values-p predicate actual expected)**
+function **(not-values-p predicate actual expected)** => t or throw assertion-error
 
-function **(error-p form)**
+function **(error-p form)** => t or throw assertion-error
 
-function **(not-error-p form)**
+function **(not-error-p form)** => t or throw assertion-error
 
-function **(condition-error-p form condition)**
+function **(condition-error-p form condition)** => t or throw assertion-error
 
-function **(not-condition-error-p form condition)**
+function **(not-condition-error-p form condition)** => t or throw assertion-error
 
-function **(custom-p test-result actual expected operator)**
+function **(custom-p test-result actual expected operator)** => t or throw assertion-error
