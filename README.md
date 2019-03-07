@@ -300,7 +300,7 @@ Check if fn throw an error. Return t when fn throw error, and throw assertion-er
 (error-p #'(lambda () ())) => throw assertion-error
 ```
 
-## (not-error-p form)
+## (not-error-p fn)
 
 Check if fn not throw an error. Return t when fn not throw error, and throw assertion-error when fn throw error.
 
