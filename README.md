@@ -150,8 +150,6 @@ Check actual not eq expected. Return t when actual is not eq expected, and throw
 
 ```lisp
 (not-eq-p nil nil) => throw assertion-error
-(not-eq-p 1 3) => t
-(eq-p 1 1) =>  throw assertion-error
 (not-eq-p nil '())) => throw assertion-error
 (not-eq-p :a :a) => throw assertion-errort
 (not-eq-p t nil) => t
