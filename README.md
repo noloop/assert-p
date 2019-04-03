@@ -138,7 +138,7 @@ Check actual eq expected. Return t when actual is eq expected, and throw asserti
 ```lisp
 (eq-p nil nil) => t
 (eq-p 1 3) => throw assertion-error
-(eq-p 1 1) => t
+(eq-p 1 1) => t ; Depending on the implementation it may return T or NIL.
 (eq-p nil '())) => t
 (eq-p :a :a) => t
 (eq-p t nil) => throw assertion-error
