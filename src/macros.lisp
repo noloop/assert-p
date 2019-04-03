@@ -54,18 +54,3 @@
            (setf ,result nil)))
        ,result)))
 
-;; (defmacro condition-error-p (test-fn condition)
-;;   `(assertion
-;;     (let ((result nil))
-;;       (handler-case (funcall ,test-fn)
-;;         (,condition (c)
-;;           (declare (ignore c))
-;;           (setf result t))
-;;         (error (c)
-;;           (declare (ignore c))
-;;           (setf result nil)))
-;;       result)
-;;     'test-fn
-;;     'error
-;;     'catch-error))
-
