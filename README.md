@@ -8,30 +8,24 @@
 
 [:assertion-error](https://github.com/noloop/assertion-error)
 
-### Download and installation
 
-**1 - Download assert-p system**
+### Download and load
 
-By quicklisp:
+**1 - Load assert-p system by quicklisp**
 
 ```
-IN PROGRESS...
+(ql:quickload :assert-p)
 ```
 
-or directly from github:
+**2 - Download and load assert-p system by github and asdf**
+
+Download directly from github:
 
 ```
 git clone https://github.com/noloop/assert-p.git
 ```
-**2 - Install assert-p**
 
-By quicklisp:
-
-```
-IN PROGRESS...
-```
-
-or directly from asdf:
+and load by ASDF:
 
 ```lisp
 (asdf:load-system :assert-p)
