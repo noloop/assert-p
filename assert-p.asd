@@ -1,5 +1,4 @@
 ;;;; -*- Mode: Lisp; Syntax: ANSI-Common-Lisp; Base: 10 -*-
-
 (defsystem :assert-p
   :author "noloop <noloop@zoho.com>"
   :maintainer "noloop <noloop@zoho.com>"
@@ -27,6 +26,5 @@
   :components ((:module "test"
                 :components
                 ((:test-file "assert-p-test"))))
-  :perform (test-op (op c)
-                    (progn (funcall (intern #.(string :run-simplet-asdf) :simplet) c)
-                           (symbol-call :simplet '#:run))))
+  :perform (test-op (op c) (symbol-call :simplet '#:run)))
+
