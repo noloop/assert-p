@@ -123,13 +123,23 @@
   (assertion test-result actual expected operator))
 
 (defun assertion (result actual expected operator)
-  "When result is t return t. When result is nil throw assertion-error. One assertion need result(t or nil), one object actual, one object expected, and one operator(string or symbol). Assertion-error also loading one message of error(built with actual, expected and operator) and the stack trace of error throw moment."
+  "When result is t return t. When result is nil throw assertion-error. One assertion need result (t or nil), one object actual, one object expected, and one operator (string or symbol). Assertion-error also loading one message of error (built with actual, expected and operator) and the stack trace of error throw moment."
   (if result
       t
       (error 'assertion-error
-             :assertion-error-message (concatenate 'string (write-to-string actual) " " (write-to-string operator) " " (write-to-string expected))
+             :assertion-error-message
+	     (error-message actual expected operator)
              :assertion-error-result result
              :assertion-error-actual actual
              :assertion-error-expected expected
              :assertion-error-stack (get-stack-trace))))
+
+(defun error-message (actual expected operator)
+  (format nil "~a ~a ~a~%~%~a"
+	  (type-of actual)
+	  (write-to-string operator)
+	  (type-of expected)
+	  (format nil "Actual:~%~%~a~%~%Expected:~%~%~a"
+		      (write-to-string actual)
+		      (write-to-string expected))))
 
